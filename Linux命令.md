@@ -52,6 +52,36 @@
     + groupdel smile    删除组，不能删除用户默认组 
     + group信息存在/etc/group文件里 ，这个文件里不显示用户默认组，/etc/passwd文件里显示用户默认组
 
+  - 所有者和所有者group
+    + chown [-R] 用户名 文件名  修改文件的所有者
+    + chown -R zhangyan archive 将archive文件夹包括文件夹内的文件的所有者变更为zhangyan，-R的意思是包括文件夹内的所有文件
+    + chgrp [-R] 组名   文件名  修改文件的所属组
+    + chgrp [-R] smile archive  将archive文件夹的所属组改为smile
+    + chown [-R] zhangyan:smile archive同时修改所属用户和组
+    + ls -ld 文件夹名   查看文件夹信息
+    + [-rwxrwxr-x] パーミッション　-通常ファイル、rwx所有者権限、rwx所有グループ権限、r-x他ユーザ権限
+    + 読み取り権 = 4
+    + 書き込み権 = 2
+    + 実行権 = 1
+
+    + 读取权：
+      + 对文件可以用cat
+      + 对文件夹可以显示文件夹里的文件一览，但会报错，可以用ls -ld，不能用cd，也不能用cat访问文件夹里的文件
+    + 写入权：
+      + 对文件可以更改内容
+      + 对文件夹内的文件可以作成，删除，即使没有访问文件夹内的文件的权限，只要有对文件夹的写入权，就可以删除文件夹内的文件
+    + 执行权：
+      + 对文件可以执行，可以cat
+      + 对文件夹可以cd进去，还能移动
+    + 修改权限：
+      + chmod [-R] 权限 文件名或文件夹名
+        + chmod 644 today.txt [rw-r--r--]
+        + chmod 755 archive   [rwxr-xr-x]
+      + chmod g+w today.txt 给所属组添加一个写入权
+        + 操作对象：u所有者，g所属组，o其他用户，a所有用户
+        + 操作：+添加，-删除，=权限指定
+        + 访问权：r，w，x
+      + chmod go-x archive 删除所有者以外的所有用户的执行权
 
 
 
