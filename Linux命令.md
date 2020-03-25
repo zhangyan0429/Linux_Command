@@ -121,7 +121,58 @@
         + [ctrl + R]    撤销上次的撤销
         + [/文字]   检索特定文字，如果检索出结果是复数个，按n查看下一个，N是查看上一个
         + [/]   是从光标往下查找，[?]是从光标往上查找
-
+    -shell
+        + /etc/shells   システムで利用可能なシェルを確認
+        + メタキャラクタ
+        + * 0文字以上任意の文字列、０も含め     ls *.txt
+        + ？任意１文字                          ls ?.txt
+        + [　]　[]内の任意1文字                 ls [ab]*.txt a或者b开头的文件,ls [1-3].txt  1.txt和2.txt和3.txt
+        + \ メタキャラクタの打ち消し
+        + date > today 重定向 将date命令的结果写入today文件，覆盖原文件
+        + date >> today 重定向 将date命令的结果写入today文件，不覆盖文件，续写在末尾
+        + ls -l today nofile    today文件不报错，nofile文件报错
+        + ls -l today nofile 2> stderr.txt  将错误信息出力到stderr.txt文件里
+        + history | less    将命令行执行的结果，用另一个命令取处理，这里将history命令运行的结果用less命令打开
+        + ！1   history命令显示执行履历一览，！番号是重新执行第几条命令，这里是第一条
+        + alias 别名一览
+        + alias la='ls -la' 给命令起个别名
+        + alias lsl='ls -l | less'
+        + lsl /etc
+        + var=Linux 变量赋值
+        + echo $var 查看变量
+        + bash 重新打开一个bash，exit退出
+        + 在旧的bash里定义的变量，新的bash里不能用
+        + 主要变量
+          + HOME ユーザーのホームディレクトリ
+          + HOSTNAME　ホスト名（コンピューター名）
+          + LANG　ユーザーの言語処理方式
+          + PATH　コマンドを検索するディレクトリリスト
+          + PS1　プロンプト書式
+          + PWD　カレントディレクトリのパス
+          + UID　ユーザーID
+          + USER　ユーザー名
+        + 環境変数
+          + printenv 環境変数を表示する
+          + set　シェル変数と環境変数を表示
+          + export world=centos 環境変数を定義
+          + 环境变量在新开的bash里能访问
+        + bashの主な組み込みコマンド
+          + alias   エイリアスを作成、表示する
+          + bg      ジョブをバックグラウンドで実行する
+          + cd      ディレクトリを移動
+          + echo    引数の内容を表示する
+          + exit    シェルを終了
+          + export  環境変数を設定する
+          + fg      ジョブをフォアグラウンドで実行する
+          + history コマンド履歴一覧
+          + jobs    ジョブを表示
+          + kill    プロセルにシグナルを送信する
+          + pwd     カレントディレクトリを表示
+          + unalias エイリアスを削除する
+        + 外部コマンド
+          + which ls    ls命令的执行文件在哪
+          + 外部命令都是在某个目录里，系统执行命令的时候先找組み込みコマンド，如果没有，就去PATH变量的目录里去找外部コマンド
+          + root用户和一般用户的PATH不一样
 
 
 
