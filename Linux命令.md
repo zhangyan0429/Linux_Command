@@ -173,17 +173,60 @@
           + which ls    ls命令的执行文件在哪
           + 外部命令都是在某个目录里，系统执行命令的时候先找組み込みコマンド，如果没有，就去PATH变量的目录里去找外部コマンド
           + root用户和一般用户的PATH不一样
-
-
-
-chown testfile fred
-chgrp testfile develop
-751
-rw-r--r--
-chmod 755 sample
-iIoOaA
-esc
-bce
-
+        + ファイル検索
+          + locate ファイル名   检索文件、非即时的
+            + locate hosts  
+            + locate *hosts*
+            + locate hosts | grep '^/etc'   查找etc文件夹下的文件
+            + # updatedb    ファイル名データベース更新、定期的に実行される
+          + find 「検索対象パス」　「検索式」   实时检索
+            + 主な検索式
+                -name ファイル名指定
+                -size ファイルサイズを指定
+                -atime ファイルの最終アクセス日を指定
+                -amin   ファイルの最終アクセス時刻を〇分前で指定する
+                -mtime  ファイルの最終修正日を指定する
+                -mmin   ファイルの最終更新時刻を〇分前で指定する
+                -perm   ファイルのアクセル権を指定する
+                -type   ファイルタイプを指定する
+            + find /bin -name "c*"    在bin目录下查找c开头的文件
+            + find -size -10k -mtime -1 查找文件大小在10kb以下，并且最终修正日在1天以内的文件
+            + find -atime +360 -exec rm {} \;   删除360天以上没有被访问过的文件
+          + ファイル内容検索
+            + 正規表現  检索文件用的替代符メタキャラクタ,和シェルのメタキャラクタ有点像
+              + .   a.c 「abc」[a1c]
+              + *   .*  0文字以上の文字列にマッチする
+              + []  [A-Z]   大文字アルファベット一文字にマッチする  [0-9][0-9]  2桁の数字にマッチする
+              + ^   ^#  行頭が＃という文字にマッチする
+              + $   ^$  空行にマッチする（改行のみの行）
+              + \   \.TXT   「.TXT」という文字列にマッチする
+            + grep [オプション]　[文字列パターン]   [検索対象ファイル]  查找文件里的内容
+              + 主なオプション
+                -F  文字列パターンを正規表現ではなく単なる文字列として扱う
+                -c  マッチした行数だけを表示する
+                -i  大文字と小文字区別しない
+                -l  マッチした行のあるファイル名のみを表示する？
+                -n  行番号も合わせて表示
+                -v  マッチしなかった行を表示する
+              + grep www /etc/services
+              + grep -i www /etc/services   不区分大小写
+              + grep http /etc/init.d/* 对init.d目录下的所有文件进行内容检索
+              + ps ax | grep bash   在ps ax的结果中查找内容中有bash的行
+              + headコマンド
+                + head [-行数]　[ファイル名]    默认显示先头10行内容
+                + head /etc/passwd
+                + ps aux | head -5  ps aux的结果显示前5行
+                + tail    [-行数]　[ファイル名]    默认显示末尾10行内容
+              + sortコマンド
+                + sort [オプション]　[ファイル名]   默认アルファベット昇順
+                + sort sample 1文字目だけを見てソートしている
+                + sort -n sample    数字を数値としてソートしたい場合　-nを付ける
+                + sort -nr sample    上の降順
+              + nlコマンド
+                + nl sample 行番号を付けて内容を出力
+              + wcコマンド
+                + wc [オプション] [ファイル名]  ファイル行数、単語数、バイト数を表示する
+                + wc /etc/hosts
+                + ls /etc/sysconfig | wc -l /etc/sysconfig配下のファイルやディレクトリの数だけ表示
 
 
